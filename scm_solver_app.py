@@ -12,7 +12,10 @@ from streamlit_pasteimage import paste_image
 from solvers import solve_break_even, solve_transportation
 
 # Đặt API Key từ secrets
-openai.api_key = st.secrets["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"]
+openai.api_key = st.secrets.get("OPENAI_API_KEY", "")
+if not openai.api_key:
+    st.error("❌ OPENAI_API_KEY chưa được thiết lập trong secrets. Vui lòng cấu hình trong Streamlit Cloud.")
+    st.stop()
 
 # Cấu hình Streamlit
 st.set_page_config(page_title="AI Giải Bài Tập LSCM", layout="wide")
