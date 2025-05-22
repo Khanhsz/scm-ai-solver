@@ -1,7 +1,7 @@
 import streamlit as st
 from PIL import Image
 import numpy as np
-import easyocr
+import pytesseract
 import openai
 import json
 import pandas as pd
@@ -12,10 +12,7 @@ from streamlit_pasteimage import paste_image
 from solvers import solve_break_even, solve_transportation
 
 # Đặt API Key từ secrets
-openai.api_key = st.secrets["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"]
-
-# Khởi tạo OCR reader
-reader = easyocr.Reader(['en', 'vi'], gpu=False)
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 # Cấu hình Streamlit
 st.set_page_config(page_title="AI Giải Bài Tập LSCM", layout="wide")
@@ -37,8 +34,7 @@ if image:
     st.image(image, caption="Ảnh đề bài", use_column_width=True)
 
     with st.spinner("🔍 Đang trích xuất văn bản từ ảnh..."):
-        result = reader.readtext(np.array(image), detail=0)
-        extracted_text = "\n".join(result)
+        extracted_text = pytesseract.image_to_string(image, lang="eng+vie")
         st.subheader("📄 Văn bản OCR:")
         st.code(extracted_text)
 
@@ -103,6 +99,3 @@ Hãy xác định loại bài toán (ví dụ: break-even, transportation, inven
     except Exception as e:
         st.error(f"❌ Không thể đọc dữ liệu JSON: {e}")
         st.code(result_text)
-        else:
-            st.info("📎 Hãy upload hoặc dán ảnh đề bài để bắt đầu.")
-            
