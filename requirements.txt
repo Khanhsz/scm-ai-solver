@@ -1,8 +1,8 @@
 streamlit
 easyocr
 openai
+pillow
 numpy
 pandas
-scipy
 matplotlib
-Pillow
+streamlit-pasteimage
