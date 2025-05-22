@@ -1,5 +1,7 @@
 import streamlit as st
 from PIL import Image
+import sys
+st.sidebar.write("🧪 Python version:", sys.version)
 import numpy as np
 import pytesseract
 import openai
