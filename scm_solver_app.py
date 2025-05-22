@@ -12,7 +12,7 @@ from streamlit_pasteimage import paste_image
 from solvers import solve_break_even, solve_transportation
 
 # Đặt API Key từ secrets
-openai.api_key = st.secrets.get("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", "")
+openai.api_key = st.secrets.get("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", "")
 if not openai.api_key:
     st.error("❌ OPENAI_API_KEY chưa được thiết lập trong secrets. Vui lòng cấu hình trong Streamlit Cloud.")
     st.stop()
